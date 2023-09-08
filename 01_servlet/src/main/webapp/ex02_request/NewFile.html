@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- 1. <a> 태그 요청하기 -->
+  
+  <div>
+    <a href="/servlet/request?name=alice&age=30">요청하기</a>
+  </div>
+  
+  <hr>
+  
+  <!-- 2. location.href 속성 요청하기 -->
+  <div data-name="james" data-age="40">
+    <button id="btn">요청하기</button>
+  </div>
+  <script>
+    $('#btn').click(function(){
+      var name = $(this).parent().data('name');
+      var age = $(this).closest('div').data('age');
+      location.href = '/servlet/request?name=' + name + '&age=' + age;
+    })
+  </script>
+  
+  <hr>
+  
+  <!-- 3. <form> 태그로 요청하기(서브밋) -->
+  <div>
+    <form id="frm" method="get" action="/servlet/request">
+      <div>
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name">  <!-- name 속성이 요청 파라미터로 인식된다. -->
+      </div>                            <!-- 1. name 속성이 없으면 요청 파라미터는 null 값으로 처리된다. -->
+                                        <!-- 2. 입력이 없으면(value 속성이 없으면) 요청파라미터는 빈 문자열("")로 인식된다. -->
+      <div>
+        <label for="age">나이</label>
+        <input type="text" id="age" name="age">   <!-- name 속성이 요청 파라미터로 인식된다. -->
+      </div>
+      <div>
+        <button type="submit">전송하기</button>
+        <button type="reset">입력초기화</button>
+      </div>
+    </form>
+  </div>
+  <script>
+    $('#frm').submit(function(event){
+      // 숫자가 아니면 true를 반환하는 정규식
+      var regNaN = /\D/; // var regNaN = /[^0-9]/
+      var age = $('#age').val();
+      if(age.length() === 0 || regNaN.test(age)){
+      alert('나이는 정수만 입력할 수 있습니다.');
+      event.preventDefault();
+      return;
+      }
+    })
+    
+  </script>
+</body>
+</html>
