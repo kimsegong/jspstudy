@@ -35,7 +35,7 @@ import javax.servlet.http.HttpServletResponse;
  *        (1) @WebServlet 애너테이션
  *        (2) 프로젝트 src/main/webapp/WEB-INF/web.xml
  */
-@WebServlet("/HelloServlet")
+@WebServlet("/hello")
 public class HelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

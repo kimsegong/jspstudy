@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <div>
+    <form method="get" action="/servlet/response">
+      <div>
+        <input type="radio" name="gender" value="man" id="man">
+        <label for="man">남자</label>
+        <input type="radio" name="gender" value="woman" id="woman">
+        <label for="woman">여자</label>
+        <input type="radio" name="gender" value="none" id="none" checked>
+        <label for="none">선택안함</label>
+      </div>
+      <div>
+        <input type="text" list="domain" name="domain">
+        <datalist id="domain">
+          <option value="naver.com"/>
+          <option value="kakao.com"/>
+          <option value="gmail.com"/>
+        </datalist>
+      </div>
+      <div>
+        <textarea rows="5" cols="50" name="content"></textarea>
+      </div>
+      <div>
+        <input type="hidden" name="region" value="seoul">
+        <button type="submit">전송하자</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
