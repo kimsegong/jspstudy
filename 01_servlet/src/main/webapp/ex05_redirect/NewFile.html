@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+  <!--
+                      /servlet
+                      ┌----------------┐
+    NewFile.html  ->  | Redirect1.java |
+                      | /request1      |
+                      └----------------┘
+                      
+                      /servlet
+                      ┌----------------┐
+    NewFile.html  ->  | Redirect2.java |
+                      | /request2      |
+                      └----------------┘
+    
+    NewFile.html                  -> Redirect1.java 
+    <a href="/servlet/request1">
+                      
+    Redirect1.java                -> NewFile.html
+    response.sendRedirect("/servlet/redirect2")
+    
+    NewFile.html                  -> Redirect2.java
+    get 방식으로 "/servlet/redirect2"로 이동 
+    
+  -->
+  <div>
+    <a href="/servlet/redirect1?name=alice">리다이렉트</a>
+  </div>
+</body>
+</html>

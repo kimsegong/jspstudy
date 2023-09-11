@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+ <div>
+  <div>
+    <input type="text" id="name" placeholder="이름">
+  </div>
+  <div>
+    <input type="text" id="age" placeholder="나이">
+  </div>
+  <div>
+    <button type="button" id="btn1">XML요청</button>
+  </div>
+  <div id="content1"></div>
+ </div>
+ <script>
+ $('#btn1').click(function(){
+   $.ajax({
+     /* 요청 */
+     type: 'get',
+     url: '/servlet/getXML',
+     data: 'name=' + $('#name').val() + '&age=' + $('#age').val(),
+     /* 응답 */
+     dataType: 'xml',
+     success: function(resData){  // resData는 <person><name>alice</name><age>30</age></person> 형태이다.
+       $('#content1').empty();
+         var ul = $('<ul>');
+         ul.append($('<li>').text($(resData).find('name').text()));
+         ul.append($('<li>').text($(resData).find('age').text()));
+         $('#content1').append(ul);
+       },
+       error: function(jqXHR){
+       alert(jqXHR.status + '(' + jqXHR.statusText + ')');
+       }
+     })
+     
+   })
+   
+ </script>
+ 
+ <hr>
+ 
+ <div>
+  <form id="frm">
+  <div>
+    <input type="text" name="title" placeholder="제목">
+  </div>
+  <div>
+    <input type="text" name="writer" placeholder="작성자">
+  </div>
+  <div>
+    <button type="button" id="btn2">JSON요청</button>
+  </div>
+  </form>
+  <div id="content2"></div>
+ </div>
+ <script>
+  $('#btn2').click(function(){
+    $.ajax({
+      /* 요청 */
+      type: 'get',
+      url: '/servlet/getJSON',
+      data: $('#frm').serialize(),  // <form>태그의 모든 입력 요소들을 파라미터로 보낸다. 이 때 입력 요소들은 name 속성을 가지고 있어야 한다.
+      /* 응답 */
+      dataType: 'json',
+      success: function(resData){  // resData는 {"writer":"관리자","title":"공지사항"}형태이다.
+        var str = '';
+        str += '<h4>' + resData.title + '</h4>';
+        str += '<h4>' + resData.writer + '</h4>';
+        $('#content2').html(str);
+        
+      },
+      error: function(jqXHR){
+        alert(jqXHR.status + '(' + jqXHR.statusText + ')');
+      }
+   })
+  })
+ </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+  <!--
+                      /servlet
+                      ┌----------------------------------┐
+    NewFile.html  ->  | Forward1.java  ->  Forward2.java |
+                      | /forward1          /forward2     |
+                      └----------------------------------┘
+    
+    NewFile.html                  ->          Forward1.java 
+    <a href="/servlet/forward1">
+                      
+    Forward1.java                 ->          Forward2.java
+    request.getRequestDispatcher("/forward2")
+    
+  -->
+
+  <div>
+    <a href="/servlet/forward1?name=alice">포워드</a>
+  </div>
+</body>
+</html>
