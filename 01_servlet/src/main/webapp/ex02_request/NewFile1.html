@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<style>
+  .blank {
+  width: 55px;
+  
+  }
+</style>
+<body>
+<form id="frm" method="post" action="/">
+<div>
+ <h4>아이디</h4>
+ <input type="text" id="id">@ naver.com
+</div>
+<div id="msg_id"></div>
+<div>
+ <h4>비밀번호</h4>
+ <input type="text" id="pw">
+</div>
+<div>
+ <h4>비밀번호 재확인</h4>
+ <input type="text" id="repw">
+</div>
+<div>
+ <h4>이름</h4>
+ <input type="text" id="name">
+</div>
+<div>
+ <h4>생년월일</h4>
+ <input class="blank" type="text" id="year" placeholder="년(4자)">
+ <select>
+ <option>월</option>
+ <option>1</option>
+ <option>2</option>
+ <option>3</option>
+ <option>4</option>
+ <option>5</option>
+ <option>6</option>
+ <option>7</option>
+ <option>8</option>
+ <option>9</option>
+ <option>10</option>
+ <option>11</option>
+ <option>12</option>
+ </select>
+ 
+ <input class="blank" type="text" id="day">
+</div>
+<div>
+ <h4>성별</h4>
+ <select>
+ <option>성별</option>
+ <option>남</option>
+ <option>여</option>
+ </select>
+</div>
+<div>
+  <h4>본인확인 이메일(선택)</h4> 
+  <input type="text" id="comfirm" placeholder="선택입력">  
+</div>
+<div>
+  <h4>휴대전화</h4> 
+  <select>
+  <option>대한민국 82+</option>
+  <option>011</option>
+  <option>012</option>
+  <option>013</option>
+  </select><br>
+  <input type="text" id="phone" placeholder="전화번호 입력"> <button type=submit>인증번호 받기</button><br>
+  <input type="text" id="number" placeholder="인증번호를 입력하세요"><br>
+  
+  <button type=submit>가입하기</button>
+</div>
+</form>
+<script>
+  $('frm').submit(function(){
+    if($('#msg_id').hasClass('good')){
+    alter('아이디를 확인하세요.');
+    event.preventDefault();
+    return;
+    }
+  })
+  
+    
+  
+</script>
+</body>
+</html>
