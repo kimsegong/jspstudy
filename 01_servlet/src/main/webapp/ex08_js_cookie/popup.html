@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div>
+    <h1>팝업화면</h1>
+  </div>
+  <div>
+    <input type="checkbox" id="do_not_open_today">
+    <label for="do_not_open_today">오늘 더 이상 열지 않기</label>
+    <button type="button" id="btn_close">닫기</button>
+  </div>
+<script>
+
+  // 오늘 더이상 열지 않기를 체크한 경우
+  // do_not_open_today 쿠키를 1일 동안 모든 경로("/")에서 사용할 수 있도록 저장한다.
+  
+  $('#btn_close').click(function(){
+    
+    if($('#do_not_open_today').is(':checked')){  // if($('#do_not_open_today').prop('checked')) 
+      
+      Cookies.set('do_not_open_today', 'true', { expires: 1, path: '/' }); // 쿠키 저장  
+    }
+    window.close();  // 현재 창 닫기
+  })
+</script>
+</body>
+</html>
