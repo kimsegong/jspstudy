@@ -16,8 +16,19 @@
   })
   
   var img = new Image();
-  $(img).attr('src', '/jsp/resource/assets/image/naver.png');
+  $(img).attr('src', getContextPath() + '/resource/assets/image/naver.png');
   $(img).css('width', '150px');
   $('.logo').html(img);
+  
  })
+ 
+ 
+   // 컨테스트패스를 반환하는 함수
+ function getContextPath(){
+   // location.href === http://localhost:8080/jsp/ex03_layout/main1.jsp
+   // location.host === localhost:8080
+   var begin = location.href.indexof(location.host) + loction.host.length;
+   var end = location.href.indexof('/', begin + 1);
+   return location.href.substring(begin, end);                
+ }
  
