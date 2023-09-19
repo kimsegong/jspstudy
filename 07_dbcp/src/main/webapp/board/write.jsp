@@ -8,60 +8,53 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+
+  $(function(){
+    // 함수 호출
+    fnboardList();
+    fnBoardRegister();  
+  })
+  
+  // 함수 정의
+  function fnboardList() {
+    $('btn_list').click(function(){
+    location.href = '${contextPath}/board/list.do';
+    })
+  }
+  
+  // 함수 정의
+  function fnBoardRegister() {
+    $('#frm_register').submit(function(event){
+      if($('#title').val() === '') {
+        alert('제목은 필수입니다.');
+        $('#title').focus();
+        event.preventDefault();
+        return;
+      }
+    })
+  }
+</script>
 </head>
 <body>
 
   <div>
-    <form method="get" action= "${contextPath}/getAge.do">
-      <label for="year">태어난년도</label>
-      <select name="year">
-        <c:forEach var= "y" begin="1970" end="2023" step="1">
-          <option>${y}</option>
-        </c:forEach>
-      </select>
-      <button type="submit">몇 살인지 알려주세요</button>
-    </form>
+   <form id="frm_register" method="post" action="${contextPath}/board/register.do">
+    <div>
+      <label for="title">제목</label>
+      <input type="text" id="title" name="title">
+    </div>
+    <div>
+      <textarea rows="5" cols="50" name="content"></textarea>
+    </div>
+    <div>
+      <button type="submit">작성완료</button>
+      <button type="reset">작성초기화</button>
+      <button type="button" id="btn_list">목록으로이동</button>
+    </div>
+   </form>
   </div>
-  
-  <hr>
-  
-  <div>
-    <form method="get" action="${contextPath}/getAbs.do">
-      <label for="n">숫자입력</label>
-      <input type="text" name="n" id="n">
-      <button type="submit">절대값요청하기</button>
-    </form>
-  </div>
-  
-  <hr>
-  
-  <div>
-    <form method="post" action="${contextPath}/getInfo.do">
-      <div>
-        <label for="name">이름</label>
-        <input type="text" name="name" id="name">
-      </div>
-      <div>
-        <label for="age">나이</label>
-        <input type="text" name="age" id="age">
-      </div>
-      <div>
-        <label>성별</label>
-        <input type="radio" name="gender" id="man" value="man"><label for="man">남자</label>
-        <input type="radio" name="gender" id="woman" value="woman"><label for="woman">여자</label>
-        <input type="radio" name="gender" id="none" value="none" checked><label for="none">선택안함</label>
-      </div>
-      <div>
-        <label>취미</label>
-        <input type="checkbox" name="hobbies" id="baskitball" value="야구"><label for="baskitball">야구</label>
-        <input type="checkbox" name="hobbies" id="travel" value="여행"><label for="travel">여행</label>
-        <input type="checkbox" name="hobbies" id="game" value="게임"><label for="game">게임</label>
-      </div>
-      <div>
-        <button type="submit">정보전송하기</button>
-      </div>
-    </form>
-  </div>
+
   
 </body>
 </html>
