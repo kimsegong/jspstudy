@@ -12,20 +12,21 @@
 
   $(function(){
     // 함수 호출
-    fnBoardList();
-    fnBoardModify();
+    fnboardList();
+    fnBoardModify();  
   })
-
+  
   // 함수 정의
-  function fnBoardList(){
-    $('#btn_list').click(function(){  
-      location.href = '${contextPath}/board/list.do';
+  function fnboardList() {
+    $('btn_list').click(function(){
+    location.href = '${contextPath}/board/list.do';
     })
   }
+  
   // 함수 정의
-  function fnBoardModify(){
+  function fnBoardModify() {
     $('#frm_edit').submit(function(event){
-      if($('#title').val() === ''){
+      if($('#title').val() === '') {
         alert('제목은 필수입니다.');
         $('#title').focus();
         event.preventDefault();
@@ -33,13 +34,12 @@
       }
     })
   }
-
 </script>
 </head>
 <body>
 
-<div>
-  <form id="frm_edit" method="post" action="${contextPath}/board/modify.do">
+  <div>
+   <form id="frm_edit" method="post" action="${contextPath}/board/modify.do">
     <div>
       <label for="title">제목</label>
       <input type="text" id="title" name="title" value="${board.title}">
@@ -53,8 +53,9 @@
       <button type="reset">작성초기화</button>
       <button type="button" id="btn_list">목록으로이동</button>
     </div>
-  </form>
-</div>
+   </form>
+  </div>
 
+  
 </body>
 </html>

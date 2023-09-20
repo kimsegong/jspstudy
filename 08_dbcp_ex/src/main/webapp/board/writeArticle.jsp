@@ -12,20 +12,21 @@
 
   $(function(){
     // 함수 호출
-    fnBoardList();
-    fnBoardModify();
+    fnboardList();
+    fnBoardAddArticle();  
   })
-
+  
   // 함수 정의
-  function fnBoardList(){
-    $('#btn_list').click(function(){  
-      location.href = '${contextPath}/board/list.do';
+  function fnboardList() {
+    $('btn_list').click(function(){
+    location.href = '${contextPath}/board/list.do';
     })
   }
+  
   // 함수 정의
-  function fnBoardModify(){
-    $('#frm_edit').submit(function(event){
-      if($('#title').val() === ''){
+  function fnBoardRegister() {
+    $('#frm_addArticleaddArticle').submit(function(event){
+      if($('#title').val() === '') {
         alert('제목은 필수입니다.');
         $('#title').focus();
         event.preventDefault();
@@ -33,28 +34,27 @@
       }
     })
   }
-
 </script>
 </head>
 <body>
 
-<div>
-  <form id="frm_edit" method="post" action="${contextPath}/board/modify.do">
+  <div>
+   <form id="frm_addArticle" method="post" action="${contextPath}/board/addArticle.do">
     <div>
       <label for="title">제목</label>
-      <input type="text" id="title" name="title" value="${board.title}">
+      <input type="text" id="title" name="title">
     </div>
     <div>
-      <textarea rows="5" cols="50" name="content">${board.content}</textarea>
+      <textarea rows="5" cols="50" name="content"></textarea>
     </div>
     <div>
-      <input type="hidden" name="board_no" value="${board.board_no}">
-      <button type="submit">수정완료</button>
+      <button type="submit">기사등록</button>
       <button type="reset">작성초기화</button>
       <button type="button" id="btn_list">목록으로이동</button>
     </div>
-  </form>
-</div>
+   </form>
+  </div>
 
+  
 </body>
 </html>

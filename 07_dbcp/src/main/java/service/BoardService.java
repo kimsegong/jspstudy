@@ -9,5 +9,6 @@ public interface BoardService {
   public ActionForward getBoardList(HttpServletRequest request);
   public ActionForward getBoardByNo(HttpServletRequest request);
   public ActionForward edit(HttpServletRequest request);
-  public ActionForward modity(HttpServletRequest request);
+  public ActionForward modify(HttpServletRequest request);
+  public ActionForward delete(HttpServletRequest request);
 }

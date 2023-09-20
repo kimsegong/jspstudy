@@ -54,12 +54,12 @@ public class BoardController extends HttpServlet {
     case "/board/write.do":
       af = new ActionForward("/board/write.jsp", false);
       break;
-    case "/index.do":
+    case "index.do":
       af = new ActionForward("/index.jsp", false);
       break;
     // 서비스 처리
-    case "/board/register.do":
-      af = boardService.register(request);
+    case "/board/addArticle.do":
+      af = boardService.addArticle(request);
       break;
     case "/board/list.do":
       af = boardService.getBoardList(request);
@@ -67,15 +67,17 @@ public class BoardController extends HttpServlet {
     case "/board/detail.do":
       af = boardService.getBoardByNo(request);
       break;
-    case "/board/edit.do":
-      af = boardService.edit(request);
+    case "/board/aditArticle.do":
+      af = boardService.editArticle(request);
       break;
-    case "/board/modify.do":
-      af = boardService.modify(request);
+    case "/board/modifyArticle.do":
+      af = boardService.modityArticle(request);
       break;
-    case "/board/delete.do":
-      af = boardService.delete(request);
+    case "/board/deleteArticle.do":
+      af = boardService.deleteArticle(request);
       break;
+    case "/board/plusHit.do":
+      af = boardService.plusHit(request);
     }
     
     // 이동

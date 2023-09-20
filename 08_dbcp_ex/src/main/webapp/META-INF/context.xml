@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+
+  <!-- 오라클 접속 정보 -->
+  <Resource
+      auth="Container"
+      name="jdbc/oraclexe"
+      type="javax.sql.DataSource"
+      driverClassName="oracle.jdbc.OracleDriver"
+      url="jdbc:oracle:thin:@localhost:1521:xe"
+      username="GD"
+      password="1111"
+      maxTotal="8"
+      maxIdle="8"
+      maxWaitMillis="-1" />
+
+
+</Context>
