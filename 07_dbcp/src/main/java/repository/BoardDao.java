@@ -3,6 +3,9 @@ package repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -81,16 +84,80 @@ public class BoardDao {
     
     // 등록 결과 반환
     return insertResult;
-//    SELECT A.BOARD_NO, A.TITLE, A.CONTENT, A.MODIFIED_AT, A.CREATED_AT
-//    FROM (SELECT ROW_NUMBER() OVER (ORDER BY BOARD_NO DESC) AS RN, BOARD_NO, TITLE, CONTENT, MODIFIED_AT, CREATED_AT
-//           FROM BOARD_T) A
-//   WHERE A.RN BETWEEN 1 AND 1;
+    
   }
   
+  // 게시글 개수 반환 메소드
+  public int getBoardCount() {
+    
+    // 게시글 개수
+    int count = 0;
+    
+    try {
+      
+      con = dataSource.getConnection();
+      String sql = "SELECT COUNT(*) FROM BOARD_T";  //  COUNT(*)
+                                                    //  --------
+                                                    //     120
+      ps = con.prepareStatement(sql);
+      rs = ps.executeQuery();
+      if(rs.next()) {
+        count = rs.getInt(1);  // count = rs.getInt("COUNT(*)")도 가능함
+      }
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      close();
+    }
+    
+    // 게시글 개수 반환
+    return count;
+    
+  }
   
+  // 게시글 목록 반환 메소드
+  public List<BoardDto> getBoardList(Map<String, Object> map){
+    
+    // 게시글 목록 저장 List
+    List<BoardDto> list = new ArrayList<BoardDto>();
+    
+    try {
+      
+      con = dataSource.getConnection();
+      String sql = "SELECT A.BOARD_NO, A.TITLE, A.CONTENT, A.MODIFIED_AT, A.CREATED_AT"
+                 + "  FROM (SELECT ROW_NUMBER() OVER (ORDER BY BOARD_NO DESC) AS RN, BOARD_NO, TITLE, CONTENT, MODIFIED_AT, CREATED_AT"
+                 + "          FROM BOARD_T) A"
+                 + " WHERE A.RN BETWEEN ? AND ?";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, (int)map.get("begin"));
+      ps.setInt(2, (int)map.get("end"));
+      rs = ps.executeQuery();
+      while(rs.next()) {
+        // rs -> BoardDto
+        BoardDto dto = BoardDto.builder()
+                        .board_no(rs.getInt(1))
+                        .title(rs.getString(2))
+                        .content(rs.getString(3))
+                        .modified_at(rs.getDate(4))
+                        .created_at(rs.getDate(5))
+                        .build();
+        // BoardDto -> list 추가
+        list.add(dto);
+      }
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      close();
+    }
+    
+    // 게시글 목록 반환
+    return list;
+    
+  }
   
-  
-  
+   
   
   
 }

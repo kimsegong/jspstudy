@@ -6,4 +6,5 @@ import common.ActionForward;
 
 public interface BoardService {
   public ActionForward register(HttpServletRequest request);
+  public ActionForward getBoardList(HttpServletRequest request);
 }
