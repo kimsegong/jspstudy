@@ -39,7 +39,7 @@ public class BoardServiceImpl implements BoardService {
     if(registerResult == 1) {
       path = request.getContextPath() + "/board/list.do";
     } else if(registerResult == 0) {
-      path = "";
+      path = request.getContextPath() + "/index.do";
     }
     
     // 어디로 어떻게 이동하는지 반환 (insert 수행 후에는 반드시 redirect 이동한다.)
@@ -78,5 +78,67 @@ public class BoardServiceImpl implements BoardService {
     
   }
   
+  @Override
+  public ActionForward getBoardByNo(HttpServletRequest request) {
+    
+    // 상세조회할 게시글 번호 
+    Optional<String> opt = Optional.ofNullable(request.getParameter("board_no"));
+    int board_no = Integer.parseInt(opt.orElse("0"));
+    
+    // DB로부터 게시글 가져오기
+    BoardDto board = dao.getBoardByNo(board_no);
+    
+    // 게시글을 /board/detail.jsp에 전달하기 위해서 forward 처리
+    request.setAttribute("board", board);
+    
+    return new ActionForward("/board/detail.jsp", false);
+  }
   
+  @Override
+  public ActionForward edit(HttpServletRequest request) {
+
+
+    
+    // 편집할 게시글 번호 
+    Optional<String> opt = Optional.ofNullable(request.getParameter("board_no"));
+    int board_no = Integer.parseInt(opt.orElse("0"));
+    
+    // DB로부터 게시글 가져오기
+    BoardDto board = dao.getBoardByNo(board_no);
+    
+    // 게시글을 /board/edit.jsp에 전달하기 위해서 forward 처리
+    request.setAttribute("board", board);   
+    return new ActionForward("/board/edit.jsp", false);
+    
+  }
+  
+  @Override
+  public ActionForward modity(HttpServletRequest request) {
+    
+    // 수정할 게시글 정보
+   String title = request.getParameter("title");
+   String content = request.getParameter("content");
+   int board_no = Integer.parseInt(request.getParameter("board_no"));
+    
+   // 수정할 게시글 정보를 BoardDto 객체로 생성
+   BoardDto dto = BoardDto.builder()
+                   .title(title)
+                   .content(content)
+                   .board_no(board_no)
+                   .build();
+   
+   // 수정하기
+   int modifyResult = dao.modify(dto);
+   
+   // 수정 성공(modifyResult == 1), 수정 실패(modifyResult == 0)
+   String path = null;
+   if(modifyResult == 1) {
+     path = request.getContextPath() + "/board/detail.do?board_no=" + board_no;
+   } else {
+     path = request.getContextPath() + "/index.do";
+   }
+   
+   // update 이후에는 redirect 한다.
+   return new ActionForward(path, true);
+  }
 }

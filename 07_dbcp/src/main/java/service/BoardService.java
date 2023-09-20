@@ -7,4 +7,7 @@ import common.ActionForward;
 public interface BoardService {
   public ActionForward register(HttpServletRequest request);
   public ActionForward getBoardList(HttpServletRequest request);
+  public ActionForward getBoardByNo(HttpServletRequest request);
+  public ActionForward edit(HttpServletRequest request);
+  public ActionForward modity(HttpServletRequest request);
 }
