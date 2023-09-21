@@ -84,7 +84,7 @@ public class BookServiceImpl implements BookService {
                     .build();
     int modifyResult = dao.bookModify(dto);
     String path = null;
-    switch(modifyResult) {
+    switch(modifyResult) { 
     case 0: path = request.getContextPath() + "/index.do"; break;
     case 1: path = request.getContextPath() + "/book/detail.do?bookNo=" + bookNo; break;    
     }
