@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.book">
+
+  <select id="bookCount" resultType="int">
+    SELECT COUNT(*)
+      FROM BOOK_T
+  </select>
+
+  <select id="bookList" parameterType="Map" resultType="domain.BookDto">
+    SELECT A.BOOK_NO, A.TITLE, A.AUTHOR, A.PRICE, A.PUBDATE
+      FROM (SELECT BOOK_NO, TITLE, AUTHOR, PRICE, PUBDATE, ROW_NUMBER() OVER(ORDER BY BOOK_NO DESC) AS RN
+              FROM BOOK_T) A
+     WHERE A.RN BETWEEN #{begin} AND #{end}
+  </select>
+  
+  <select id="bookDetail" parameterType="int" resultType="domain.BookDto">
+    SELECT BOOK_NO, TITLE, AUTHOR, PRICE, PUBDATE
+      FROM BOOK_T
+     WHERE BOOK_NO = #{bookNo}
+  </select>
+  
+  <insert id="bookAdd" parameterType="domain.BookDto">
+    INSERT INTO BOOK_T (
+        BOOK_NO
+      , TITLE
+      , AUTHOR
+      , PRICE
+      , PUBDATE
+    ) VALUES (
+        BOOK_SEQ.NEXTVAL
+      , #{title}
+      , #{author}
+      , #{price}
+      , SYSDATE
+    )
+  </insert>
+  
+  <update id="bookModify" parameterType="domain.BookDto">
+    UPDATE BOOK_T
+       SET TITLE = #{title}
+         , AUTHOR = #{author}
+         , PRICE = #{price}
+     WHERE BOOK_NO = #{bookNo}
+  </update>
+  
+  <delete id="bookDelete" parameterType="int">
+    DELETE
+      FROM BOOK_T
+     WHERE BOOK_NO = #{bookNo}
+  </delete>
+  
+</mapper>
