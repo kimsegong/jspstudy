@@ -5,4 +5,4 @@ JSP가 실행되면 자바 서블릿(Servlet)으로 변환되며 웹 어플리�
 그렇게 생성된 데이터를 웹페이지와 함께 클라이언트로 응답한다.
 
 
-<img>https://blog.kakaocdn.net/dn/0CaN9/btqEiMKbAQf/zcJr0xohg1aV228f2wtzq0/img.jpg</img>
+<img src=https://blog.kakaocdn.net/dn/0CaN9/btqEiMKbAQf/zcJr0xohg1aV228f2wtzq0/img.jpg></img>
