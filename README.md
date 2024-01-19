@@ -11,27 +11,12 @@ HTML코드에 직접 자바 코드를 작성하는 방법을 알아보려고 한
 
 <h3>📌 스크립트 태그 종류</h3>
 
-<%
-    int declarationNumber = 1;
-%>
 <p><strong>1. 선언문(Declaration):</strong> <%= declarationNumber %>. 자바 변수나 메소드를 정의하는 데 사용하는 태그</p>
 
-<!-- 스크립틀릿(Scriptlet) -->
-<%
-    int scriptletNumber = 2;
-%>
 <p><strong>2. 스크립틀릿(Scriptlet):</strong> <%= scriptletNumber %>. 자바 변수 선언 및 자바 로직 코드를 작성하는 데 사용되는 태그</p>
 
-<!-- 표현문(Expression) -->
-<%
-    int expressionNumber = 3;
-%>
 <p><strong>3. 표현문(Expression):</strong> <%= expressionNumber %>. 변수, 계산식, 메소드 호출 결과를 나타내는 태그</p>
 
-<!-- 지시자(Directive) -->
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <p><strong>4. 지시자(Directive):</strong> 페이지 속성 지정</p>
 
-<!-- 주석(Comment) -->
-<%-- 주석처리 이거를 html로 앞에 숫자 달아줄 수 있게 태그 달아줘 --%>
 <p><strong>5. 주석(Comment):</strong> 주석 처리. 이것을 HTML로 앞에 숫자를 달아줄 수 있게 태그를 달아줘</p>
