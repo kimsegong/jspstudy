@@ -5,7 +5,7 @@ JSP가 실행되면 자바 서블릿(Servlet)으로 변환되며 웹 어플리�
 그렇게 생성된 데이터를 웹페이지와 함께 클라이언트로 응답한다.
 
 
-<img src=https://blog.kakaocdn.net/dn/0CaN9/btqEiMKbAQf/zcJr0xohg1aV228f2wtzq0/img.jpg></img>
+
 
 HTML코드에 직접 자바 코드를 작성하는 방법을 알아보려고 한다.
 
